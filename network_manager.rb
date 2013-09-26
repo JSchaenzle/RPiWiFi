@@ -26,5 +26,5 @@ settings[:passkey] = "8983143239"
 
 foo = ERB.new File.read('./templates/infstr_wpa_supplicant.conf.erb')
 
-output = File.open ('/etc/wpa_supplicant/wpa_supplicant.conf')
+output = File.new('./wpa_supplicant.conf', "w+")
 output.write foo.result
