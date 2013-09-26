@@ -1,0 +1,72 @@
+Network Manager Plan
+
+Default mode is Ad Hoc Network.
+
+------------------------------------------
+
+#Ad Hoc Network Mode
+auto lo
+iface lo inet loopback
+iface eth0 inet dhcp
+ 
+auto wlan0
+iface wlan0 inet static
+  address 192.168.1.1
+  netmask 255.255.255.0
+  wireless-channel 1
+  wireless-essid RPiAdHocNetwork
+  wireless-mode ad-hoc
+
+---------------------------------------
+
+# Enable DHCP on ad hoc network /etc/dhcp/dhcpd.conf. 
+
+ddns-update-style interim;
+default-lease-time 600;
+max-lease-time 7200;
+authoritative;
+log-facility local7;
+subnet 192.168.1.0 netmask 255.255.255.0 {
+  range 192.168.1.5 192.168.1.150;
+}
+
+---------------------------------
+#Restart network
+sudo ifdown wlan0
+sudo ifup wlan0
+
+-------------------------------
+#Infrastructure network
+
+auto lo
+
+iface lo inet loopback
+iface eth0 inet dhcp
+
+allow-hotplug wlan0
+iface wlan0 inet manual
+wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf
+iface default inet dhcp
+        -------------------------------------------
+pi@raspberrypi ~ $ sudo cat /etc/wpa_supplicant/wpa_supplicant.conf
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+
+network={
+ssid="DON'T STEAL MY INTERNET"
+psk="8983143239"
+
+# Protocol type can be: RSN (for WP2) and WPA (for WPA1)
+proto=WPA
+
+# Key management type can be: WPA-PSK or WPA-EAP (Pre-Shared or Enterprise)
+key_mgmt=WPA-PSK
+
+# Pairwise can be CCMP or TKIP (for WPA2 or WPA1)
+pairwise=TKIP
+
+#Authorization option should be OPEN for both WPA1/WPA2 (in less commonly used are SHARED and LEAP)
+auth_alg=OPEN
+}
+
+
