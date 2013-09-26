@@ -18,15 +18,13 @@ class NetworkManager
 		available_networks = scan_results.scan(/ESSID:\"(.+)\"/).flatten
 	end
 
-	def self.do_stuff
-		settings = {rpi_wifi_version: VERSION}
-		settings[:ssid] = "DON'T STEAL MY INTERNET"
-		settings[:passkey] = "8983143239"
-
-		foo = ERB.new File.read('./templates/infstr_wpa_supplicant.conf.erb')
-
-		output = File.open ('/etc/wpa_supplicant/wpa_supplicant.conf')
-		output.write foo.result
-	end
 end
 
+settings = {rpi_wifi_version: VERSION}
+settings[:ssid] = "DON'T STEAL MY INTERNET"
+settings[:passkey] = "8983143239"
+
+foo = ERB.new File.read('./templates/infstr_wpa_supplicant.conf.erb')
+
+output = File.open ('/etc/wpa_supplicant/wpa_supplicant.conf')
+output.write foo.result
