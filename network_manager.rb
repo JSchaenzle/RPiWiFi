@@ -25,7 +25,7 @@ class NetworkManager
 
 		foo = ERB.new File.read('./templates/infstr_wpa_supplicant.conf.erb')
 
-		output = File.open ('/etc/wpa_supplicant/wpa_supplicant.conf', 'w+')
+		output = File.open ('/etc/wpa_supplicant/wpa_supplicant.conf')
 		output.write foo.result
 	end
 end
