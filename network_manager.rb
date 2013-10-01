@@ -30,12 +30,12 @@ class NetworkManager
 		convert_template_to_file('./templates/ad_hoc/interfaces.erb', '/etc/network/interfaces')
 
 		# Restart the dhcp server
-		exec "sudo service isc-dhcp-server stop"
-		exec "sudo service isc-dhcp-server start"
+		system("service isc-dhcp-server stop")
+		system("service isc-dhcp-server start")
 
 		# Restart the interface
-		exec "sudo ifdown wlan0"
-		exec "sudo ifup wlan0"
+		system("ifdown wlan0")
+		system("ifup wlan0")
 	end
 
 	def self.config_infrastructure_network(ssid, pwd, sec_type)
