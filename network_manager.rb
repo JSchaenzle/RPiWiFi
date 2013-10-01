@@ -24,7 +24,7 @@ class NetworkManager
 	end
 
 	def reset_to_ad_hoc
-		convert_template_to_file('./templates/ad_hoc/dhcpd.conf.erb', '/etc/dhcpd.conf')
+		convert_template_to_file('./templates/ad_hoc/dhcpd.conf.erb', '/etc/dhcp/dhcpd.conf')
 		convert_template_to_file('./templates/ad_hoc/interfaces.erb', '/etc/network/interfaces')
 	end
 
