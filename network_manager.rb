@@ -24,23 +24,17 @@ class NetworkManager
 	end
 
 	def reset_to_ad_hoc
-
 		# Load the config files from the templates
 		convert_template_to_file('./templates/ad_hoc/dhcpd.conf.erb', '/etc/dhcp/dhcpd.conf')
 		convert_template_to_file('./templates/ad_hoc/interfaces.erb', '/etc/network/interfaces')
-
-		# Restart the dhcp server
-		system("service isc-dhcp-server stop")
-		system("service isc-dhcp-server start")
-
-		# Restart the interface
-		system("ifdown wlan0")
-		system("ifup wlan0")
+		restart_dhcp
+		restart_network
 	end
 
-	def self.config_infrastructure_network(ssid, pwd, sec_type)
+	def connect_to_infstr_network
 		convert_template_to_file('./templates/infstr/interfaces.erb', '/etc/interfaces')
 		convert_template_to_file('./templates/infstr/wpa_supplicant.erb', '/etc/dhcp/dhcpd.conf')
+		stop_dhcp
 	end
 
 	def self.is_connected
@@ -56,6 +50,20 @@ class NetworkManager
 		File.open(output, "w+") do |f|
 			f.write foo.result(binding)
 		end
+	end
+
+	def restart_dhcp
+		system("service isc-dhcp-server stop")
+		system("service isc-dhcp-server start")
+	end
+
+	def stop_dhcp
+		system("service isc-dhcp-server stop")
+	end
+
+	def restart_network
+		system("ifdown wlan0")
+		system("ifup wlan0")
 	end
 
 end
