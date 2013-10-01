@@ -7,7 +7,7 @@ DEFAULT_SETTINGS = {
 	rpi_wifi_version: VERSION,
 	infstr: { ssid: "DON'T STEAL MY INTERNET",
 			  passkey: "8983143239" },
-	ad_hoc: { subnet: "255.255.255.0",
+	ad_hoc: { subnet: "192.168.1.0",
 			  netmask: "255.255.255.0",
 			  ip_range_min: "192.168.1.5",
 			  ip_range_max: "192.168.1.150" }
