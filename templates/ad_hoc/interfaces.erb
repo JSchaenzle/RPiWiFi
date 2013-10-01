@@ -1,0 +1,15 @@
+# BrewMon
+# Network Manager (RPiWiFi) Version: <%=settings[:rpi_wifi_version]%>
+# Template for /etc/network/interfaces (AdHoc network)
+
+auto lo
+iface lo inet loopback
+iface eth0 inet dhcp
+ 
+auto wlan0
+iface wlan0 inet static
+  address 192.168.1.1
+  netmask 255.255.255.0
+  wireless-channel 1
+  wireless-essid RPiAdHocNetwork
+  wireless-mode ad-hoc

@@ -1,0 +1,12 @@
+# BrewMon
+# Network Manager (RPiWiFi) Version: <%=settings[:rpi_wifi_version]%>
+# Template for /etc/network/interfaces (AdHoc network)
+
+ddns-update-style interim;
+default-lease-time 600;
+max-lease-time 7200;
+authoritative;
+log-facility local7;
+subnet <%=settings[:ad_hoc][:subnet]%> netmask <%=settings[:ad_hoc][:netmask]%> {
+	range <%=settings[:ad_hoc][:ip_range_min]%> <%=settings[:ad_hoc][:ip_range_max]%>;
+}

@@ -3,6 +3,11 @@ Network Manager Plan
 Default mode is Ad Hoc Network.
 
 ------------------------------------------
+sudo apt-get update
+sudo apt-get install dhcp3-server
+
+------------------------------------------
+
 
 #Ad Hoc Network Mode
 auto lo
