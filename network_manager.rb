@@ -32,8 +32,9 @@ class NetworkManager
 	end
 
 	def connect_to_infstr_network
-		convert_template_to_file('./templates/infstr/interfaces.erb', '/etc/interfaces')
-		convert_template_to_file('./templates/infstr/wpa_supplicant.erb', '/etc/dhcp/dhcpd.conf')
+		convert_template_to_file('./templates/infstr/interfaces.erb', '/etc/network/interfaces')
+		convert_template_to_file('./templates/infstr/wpa_supplicant.conf.erb', '/etc/dhcp/dhcpd.conf')
+		restart_network
 		stop_dhcp
 	end
 
@@ -62,7 +63,7 @@ class NetworkManager
 	end
 
 	def restart_network
-		system("ifdown wlan0")
+		system("ifdown --force wlan0")
 		system("ifup wlan0")
 	end
 
