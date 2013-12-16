@@ -1,3 +1,6 @@
+This is just a list of random notes.
+
+
 Network Manager Plan
 
 Default mode is Ad Hoc Network.
