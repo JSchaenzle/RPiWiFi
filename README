@@ -1,8 +1,9 @@
-# RPi WiFi 
+#RPi WiFi 
 
 A network configuration library for the Raspberry Pi
 
-## Goals
+##Goals
+
 - Make it simple to connect a headless device to an infrastructure WiFi network using only a web browser.
 - Support switching between Ad-Hoc and Infractructure networks
 - Handle storage of remembered Infrastructure networks credentials
