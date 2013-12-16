@@ -5,8 +5,11 @@ VERSION = "1.0.0"
 
 DEFAULT_SETTINGS = { 
 	rpi_wifi_version: VERSION,
-	infstr: { ssid: "DON'T STEAL MY INTERNET",
-			  passkey: "8983143239" },
+
+	infstr: { key_mgmt: "WPA-PSK"
+			  ssid: "Secure Network",
+			  passkey: "123456" },
+
 	ad_hoc: { subnet: "192.168.1.0",
 			  netmask: "255.255.255.0",
 			  ip_range_min: "192.168.1.5",
@@ -39,9 +42,11 @@ class NetworkManager
 	end
 
 	def self.is_connected
+		"wpa_cli status"
 	end
   
 	def self.get_network_list
+		# More info with "wpa_cli scan" and "wpa_cli scan_results"
 		scan_results = `iwlist wlan0 scan`
 		available_networks = scan_results.scan(/ESSID:\"(.+)\"/).flatten
 	end

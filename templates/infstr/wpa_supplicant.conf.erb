@@ -6,14 +6,16 @@ ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
 update_config=1
 
 network={
-ssid="<%=settings[:ssid]%>"
-psk="<%=settings[:passkey]%>"
+ssid="<%=settings[:infstr][:ssid]%>"
+<%=if settings[:infstr][:key_mgmt] != "NONE"%>
+psk="<%=settings[:infstr][:passkey]%>"
+<%end%>
 
 # Protocol type can be: RSN (for WP2) and WPA (for WPA1)
 proto=WPA
 
 # Key management type can be: WPA-PSK or WPA-EAP (Pre-Shared or Enterprise)
-key_mgmt=WPA-PSK
+key_mgmt=<%=settings[:infstr][:key_mgmt]%>
 
 # Pairwise can be CCMP or TKIP (for WPA2 or WPA1)
 pairwise=TKIP
